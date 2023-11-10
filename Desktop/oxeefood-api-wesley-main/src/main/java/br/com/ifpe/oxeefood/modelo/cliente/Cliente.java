@@ -1,9 +1,14 @@
+
+
 package br.com.ifpe.oxeefood.modelo.cliente;
+import java.util.List;
 
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
@@ -25,7 +30,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente extends EntidadeAuditavel  {
-    @Column
+
+   @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+   private List<EnderecoCliente> enderecos;
+
+   @Column
    private String nome;
    @Column
    private LocalDate dataNascimento;
@@ -35,6 +44,5 @@ public class Cliente extends EntidadeAuditavel  {
    private String foneCelular;
    @Column
    private String foneFixo;
-
 }
 
